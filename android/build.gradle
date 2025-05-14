@@ -25,7 +25,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
-    usernamespace "com.github.chinloyal.pusher_client"
+    namespace "com.github.chinloyal.pusher_client"
     compileSdkVersion 29
 
     sourceSets {
