@@ -5,11 +5,11 @@ buildscript {
     ext.kotlin_version = '1.8.0'
     repositories {
         google()
-        jcenter()
+        mavenCentral() // It's better to replace jcenter with mavenCentral as jcenter is deprecated
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.5.0'
+        classpath 'com.android.tools.build:gradle:7.3.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
@@ -17,7 +17,7 @@ buildscript {
 rootProject.allprojects {
     repositories {
         google()
-        jcenter()
+        mavenCentral() // Replacing jcenter with mavenCentral
     }
 }
 
@@ -25,24 +25,32 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
+    compileSdkVersion 34
     namespace "com.github.chinloyal.pusher_client"
-    compileSdkVersion 29
 
-    sourceSets {
-        main.java.srcDirs += 'src/main/kotlin'
-    }
     defaultConfig {
-        minSdkVersion 16
+        minSdkVersion 21
+        targetSdkVersion 34 // Always good to specify targetSdkVersion
     }
+
     lintOptions {
         disable 'InvalidPackage'
     }
 
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+
     dependencies {
+        // Pusher client Java dependency
         implementation "com.pusher:pusher-java-client:2.2.5"
+
+        // Kotlin standard library
+        implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     }
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    // Kotlin Standard library (ensure that it's not duplicated)
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 }
