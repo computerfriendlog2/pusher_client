@@ -33,6 +33,10 @@ android {
         targetSdkVersion 34 // Always good to specify targetSdkVersion
     }
 
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
     lintOptions {
         disable 'InvalidPackage'
     }
